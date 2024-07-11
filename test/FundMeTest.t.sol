@@ -34,11 +34,6 @@ contract FundMeTest is Test {
         assertEq(ins.getFeedVersion(), 4);
     }
 
-//    function test_approximate_eth2usd_rate() public {
-//        uint256 rate = ins.getConversionRate();
-//        console.log("rate: %s",rate);
-//    }
-
     function test_fund_requires_min_eth() public {
         hoax(funder, 10 ether);
         vm.expectRevert();
