@@ -58,6 +58,13 @@ contract FundMeTest is Test {
         assertEq(address(ins).balance, 2e15 wei);
     }
 
+    function test_funder_added() public {
+        vm.deal(funder, 5 ether);
+        vm.prank(funder);
+        ins.fund{value: 2 ether}();
+        assertEq(funder, ins.funders(0));
+    }
+
     function test_funder_attribution() public {
         vm.deal(funder, 10 ether);
         vm.startPrank(funder);
