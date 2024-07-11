@@ -11,6 +11,9 @@ remappings:
 	@cat ${REMAPPINGS_PATH}
 
 test-local:
+	@forge test --watch -vvv
+
+test-local-gas:
 	@forge test --watch -vvv --gas-report
 
 # simulate txns as if they are running Sepolia chain using the configured feed
