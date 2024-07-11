@@ -80,21 +80,4 @@ contract FundMe {
         fund(); // why payable? isn't this covered by receive()?
     }
 
-//    function ethToUSD(uint256 ethAmount) public returns (uint256){
-//        uint256 ethPrice = getConversionRate();
-//        uint256 usdPrice = (ethPrice * ethAmount) / 1e18;
-//        // why divide by 1e18 ... again, 1^18 * 1^18 = 1^(18+18) = 1^36
-//        return usdPrice;
-//    }
-//
-//    function getConversionRate() public view returns (uint256){
-//        (,int256 answer,,,) = pricefeed.latestRoundData();
-//        // why x*1e10 ... answer returned with 8 decimals, but, wei is e18
-//        // recall 1^10 * 1^8 = 1^(10 + 8) = 1^18
-//
-////        int256 answer = 3119258696210000000000;
-//        uint256 price = uint256(answer) * 1e10;
-//
-//        return price;
-//    }
 }
