@@ -8,15 +8,14 @@ import {ConfigManager} from "../src/ConfigManager.sol";
 contract DeployFundMe is Script {
     function run() external {
 
-        // not a real txn ... no gas const
+        // trying a simpler pattern here.
         ConfigManager config = new ConfigManager();
 
+
         vm.startBroadcast();
+
         // gas cost starts here.
 
-        // @todo This seems a little weird ... are the calls to vm.startBroadcast()
-        // side effects for the test/* scripts? ... perhaps just a createFundMe()
-        // method here, that both tests and script can call?
         new FundMe({
             priceFeed: config.get().priceFeedAddress
         });
