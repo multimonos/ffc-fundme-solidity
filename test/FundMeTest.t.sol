@@ -103,7 +103,7 @@ contract FundMeTest is Test {
     function test_withdraw_after_one_deposit() public {
         // depsit
         uint256 ownerBalance = address(owner).balance;
-        uint256 fundmeBalance = fundme.balance();
+        // uint256 fundmeBalance = fundme.balance(); // @todo
         hoax(funder, 5 ether);
         fundme.fund{value: 3 ether}();
         // intermediate state
