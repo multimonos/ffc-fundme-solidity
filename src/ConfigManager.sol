@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import {MockV3Aggregator} from "@chainlink/contracts/src/v0.8/tests/MockV3Aggregator.sol";
 import {MockPriceFeed} from "../test/mocks/MockPriceFeed.sol";
 
 contract ConfigManager {
@@ -15,6 +14,7 @@ contract ConfigManager {
     uint8 public constant DECIMALS = 8;
     int256 public constant DEFAULT_PRICE = 3118e8;
     uint256 public constant SEPOLIA_CHAIN_ID = 11155111;
+
     // private
     NetworkConfig private config;
 
