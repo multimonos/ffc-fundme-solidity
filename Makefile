@@ -45,3 +45,9 @@ sepolia-read:
 	@cast call ${SEPOLIA_CONTRACT} "getFeedVersion()" --rpc-url=${SEPOLIA_URL}
 sepolia-read-dec:
 	@cast call ${SEPOLIA_CONTRACT} "getFeedVersion()" --rpc-url=${SEPOLIA_URL} |cast 2d
+
+
+# --- ANVIL
+anvil-deploy:
+	@forge clean
+	@forge script script/DeployFundMe.s.sol --rpc-url=${ANVIL_URL} --private-key=${PK3} --broadcast
