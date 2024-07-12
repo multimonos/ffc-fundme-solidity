@@ -102,7 +102,9 @@ contract FundMeTest is Test {
 
     function test_withdraw_after_one_deposit() public {
         // depsit
-        hoax(funder, 3 ether);
+        uint256 ownerBalance = address(owner).balance;
+        uint256 fundmeBalance = fundme.balance();
+        hoax(funder, 5 ether);
         fundme.fund{value: 3 ether}();
         // intermediate state
         assertEq(owner.balance, 0);
@@ -111,11 +113,12 @@ contract FundMeTest is Test {
         vm.prank(owner);
         fundme.withdraw();
         // final state
-        assertEq(owner.balance, 3 ether);
+        assertEq(owner.balance, ownerBalance + 3 ether);
         assertEq(fundme.balance(), 0 ether);
     }
 
     function test_withdraw_after_many_deposits() public {
+        uint256 ownerBalance = address(owner).balance;
         Donor[3] memory donors;
         donors[0] = Donor(address(0x5), 3 ether);
         donors[1] = Donor(address(0x6), 2 ether);
@@ -135,7 +138,7 @@ contract FundMeTest is Test {
         fundme.withdraw();
         // final state
         assertEq(fundme.balance(), 0);
-        assertEq(owner.balance, total);
+        assertEq(owner.balance, ownerBalance + total);
     }
 
 
@@ -176,18 +179,4 @@ contract FundMeTest is Test {
         assertEq(fundme.balance(), 5 ether);
         assertTrue(ok);
     }
-//
-//    function test_fallback_funder_attribution() public {
-//        address foobar = makeAddr("foobar");
-//        vm.deal(foobar, 10 ether);
-//        vm.prank(foobar);
-//        address(fundme).call{value: 5 ether}("");
-//        assertEq(fundme.funderAmount(foobar), 5 ether);
-//    }
-
-//    function test_get_price() public {
-//        ConfigManager mgr = new ConfigManager();
-//        console.log("price: %s", mgr.DEFAULT_PRICE());
-//        assertTrue(true);
-//    }
 }

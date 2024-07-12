@@ -1,5 +1,5 @@
 # --- PROJECT
-include .env
+-include .env
 REMAPPINGS_PATH=./remappings.txt
 
 install:
@@ -18,7 +18,7 @@ test-local-gas:
 
 # simulate txns as if they are running Sepolia chain using the configured feed
 test-sepolia:
-	forge test --watch -vvv --gas-report --fork-url ${SEPOLIA_URL}
+	forge test --watch -vvv --gas-report --fork-url $(SEPOLIA_URL)
 
 
 # FundMe.getVersion() relies on the Sepolia Chainlink Feed at 0x694AA1769357215DE4FAC081bf1f309aDC325306
