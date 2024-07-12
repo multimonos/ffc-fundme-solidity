@@ -6,15 +6,16 @@ import {MockPriceFeed} from "../test/mocks/MockPriceFeed.sol";
 
 contract ConfigManager {
 
-    uint8 public constant DECIMALS = 8;
-    int256 public constant DEFAULT_PRICE = 3118e8;
-    uint256 public constant SEPOLIA_CHAIN_ID = 11155111;
-
     struct NetworkConfig {
         string ID;
         address PriceFeedAddress;
     }
 
+    // public
+    uint8 public constant DECIMALS = 8;
+    int256 public constant DEFAULT_PRICE = 3118e8;
+    uint256 public constant SEPOLIA_CHAIN_ID = 11155111;
+    // private
     NetworkConfig private config;
 
     function get() public returns (NetworkConfig memory) {
