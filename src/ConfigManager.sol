@@ -7,8 +7,8 @@ import {MockPriceFeed} from "../test/mocks/MockPriceFeed.sol";
 contract ConfigManager {
 
     struct NetworkConfig {
-        string ID;
-        address PriceFeedAddress;
+        string id;
+        address priceFeedAddress;
     }
 
     // public
@@ -19,7 +19,7 @@ contract ConfigManager {
     NetworkConfig private config;
 
     function get() public returns (NetworkConfig memory) {
-        if (config.PriceFeedAddress != address(0)) {
+        if (config.priceFeedAddress != address(0)) {
             return config;
         }
 
@@ -38,8 +38,8 @@ contract ConfigManager {
 
     function createSepoliaConfig() private pure returns (NetworkConfig memory){
         return NetworkConfig({
-            ID: "sepolia",
-            PriceFeedAddress: 0x694AA1769357215DE4FAC081bf1f309aDC325306
+            id: "sepolia",
+            priceFeedAddress: 0x694AA1769357215DE4FAC081bf1f309aDC325306
         });
     }
 
@@ -48,8 +48,8 @@ contract ConfigManager {
         MockPriceFeed feed = new MockPriceFeed(DECIMALS, DEFAULT_PRICE);
 
         return NetworkConfig({
-            ID: "anvil",
-            PriceFeedAddress: address(feed)
+            id: "anvil",
+            priceFeedAddress: address(feed)
         });
     }
 }

@@ -23,7 +23,7 @@ contract FundMe {
     address[] public funders;
     mapping(address funder => uint256 amount) public funderAmount;
     //priv
-    AggregatorV3Interface immutable private pricefeed;
+    AggregatorV3Interface immutable private _priceFeed;
     //err
     error OnlyOwner(address); //saves 10,000 gas
     error InsufficientPayment(); //saves 10,000 gas
@@ -34,9 +34,9 @@ contract FundMe {
         _;
     }
     //fns
-    constructor(address _pricefeed) {
+    constructor(address priceFeed) {
         owner = msg.sender;
-        pricefeed = AggregatorV3Interface(_pricefeed);
+        _priceFeed = AggregatorV3Interface(priceFeed);
     }
 
     receive() external payable {
@@ -77,7 +77,7 @@ contract FundMe {
     }
 
     function getPrice() public view returns (uint256) {
-        (,int256 answer,,,) = pricefeed.latestRoundData();
+        (,int256 answer,,,) = _priceFeed.latestRoundData();
         // why answer * 1e10 ... answer returned with 8 decimals, but, wei is e18
         // recall 1^10 * 1^8 = 1^(10 + 8) = 1^18 ..., so, we normalize the precision.
         return  uint256(answer) * 1e10;

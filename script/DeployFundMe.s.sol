@@ -11,8 +11,6 @@ contract DeployFundMe is Script {
         // not a real txn ... no gas const
         ConfigManager config = new ConfigManager();
 
-        address pricefeedAddress = config.get().PriceFeedAddress;
-
         vm.startBroadcast();
         // gas cost starts here.
 
@@ -20,7 +18,7 @@ contract DeployFundMe is Script {
         // side effects for the test/* scripts? ... perhaps just a createFundMe()
         // method here, that both tests and script can call?
         new FundMe({
-            _pricefeed: pricefeedAddress
+            priceFeed: config.get().priceFeedAddress
         });
 
         vm.stopBroadcast();

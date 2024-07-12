@@ -23,12 +23,14 @@ contract FundMeTest is Test {
         funder = makeAddr("funder");
 
         ConfigManager config = new ConfigManager();
-//        console.log("config: %s", config.get().ID);
+//        console.log("config: %s", config.get().id);
 
 //        hoax(owner, 0 ether); // fails to set "our" owner as expected
 //        vm.prank(owner); // fails to set "our" owner as expected
         vm.startPrank(owner);
-        fundme = new FundMe({_pricefeed: config.get().PriceFeedAddress});
+        fundme = new FundMe({
+            priceFeed: config.get().priceFeedAddress
+        });
         vm.stopPrank();
     }
 
